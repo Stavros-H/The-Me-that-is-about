@@ -10,7 +10,7 @@ The `Start application` workflow runs:
 npm start
 ```
 
-The site includes six pages: Home, Media, Future, Learning, Interests, and Admin.
+The site includes six pages: Home, Media, Future, Learning, The Pit, and Admin.
 
 ## Admin setup
 

@@ -1,6 +1,6 @@
 const navItems = [
   ["index.html", "Home"], ["media.html", "Media"], ["future.html", "Future"],
-  ["learning.html", "Learning"], ["interests.html", "Interests"], ["admin.html", "Admin"]
+  ["learning.html", "Learning"], ["the-pit.html", "The Pit"], ["admin.html", "Admin"]
 ];
 
 function renderShell() {
