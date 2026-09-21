@@ -1,13 +1,19 @@
 # Project setup
 
-This imported repository is intentionally left minimal.
+This is a placeholder personal website for Stavros H. It uses HTML, CSS, client-side JavaScript, and an Express server.
 
 ## Run
 
-The `Start application` workflow serves the static `index.html` file with:
+The `Start application` workflow runs:
 
 ```sh
-python3 -m http.server 5000 --bind 0.0.0.0
+npm start
 ```
 
-The preview is intentionally a blank white page.
+The site includes six pages: Home, Media, Future, Learning, Interests, and Admin.
+
+## Admin setup
+
+Set the `ADMIN_PASSWORD` secret before using the Admin page. The password is checked only on the server. Contact submissions use Replit App Storage at `data/contactReceived.json`.
+
+The personal writing, social links, photos, videos, and goals are intentionally placeholders until Stavros provides them.

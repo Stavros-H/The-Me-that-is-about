@@ -1,0 +1,26 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js && node --check script.js && node --check admin.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Stavros-H/The-Me-that-is-about.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Stavros-H/The-Me-that-is-about/issues"
+  },
+  "homepage": "https://github.com/Stavros-H/The-Me-that-is-about#readme",
+  "dependencies": {
+    "@replit/object-storage": "^1.0.0",
+    "express": "^5.2.1"
+  }
+}

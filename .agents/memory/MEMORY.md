@@ -1,0 +1,1 @@
+- [App Storage provisioning](app-storage-provisioning.md) — storage calls require a provisioned default bucket; keep initialization lazy and surface persistence errors clearly.
