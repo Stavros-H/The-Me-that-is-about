@@ -1,0 +1,237 @@
+Platform Requirements
+Build the website in Replit using HTML, CSS, and JavaScript.
+Use JavaScript on both the client and server to handle form submissions, persistent data, authentication, and Admin features.
+The website must contain 6 separate pages that are accessible through the site's navigation.
+Use relative paths for all internal pages, CSS, JavaScript, images, videos, and other project resources.
+Organize project files according to the File Structure below.
+The website must be published as a Replit app that supports server-side JavaScript. It cannot be published as a static-only website.
+File Structure
+Project Files
+index.html: Home page
+media.html: Media page
+future.html: Future page
+choice1.html: Rename with a descriptive filename related to the selected topic.
+choice2.html: Rename with a descriptive filename related to the selected topic.
+admin.html: Admin dashboard
+styles.css: Website styles
+script.js: Client-side JavaScript
+admin.js: Admin dashboard JavaScript
+server.js: Server-side JavaScript
+assets/
+images/
+videos/
+App Storage
+Persistent contact data must be stored in Replit App Storage using this object path:
+data/contactReceived.json
+This JSON file stores all contact form submissions and their current status.
+Global Objective Criteria
+Applies to all pages
+Navigation: All 6 pages contain the universal header, footer, and theme.
+Active States: The current page's link in the <nav> has a distinct visual active state, such as an underline, background change, or other clearly visible difference.
+Link Integrity: All internal and external links work with 0 broken links or 404 errors.
+Consistency: The website uses a consistent visual design across all 6 pages.
+Home Page
+Student's full name as the <h1>.
+Photo of the student clearly showing their face prominently displayed above the fold.
+Biography: Contains exactly 2 or 3 <p> elements.
+Media: Includes at least two images and/or videos.
+Contact section that includes links to social media and email.
+Contact form that allows a visitor to send the student a message.
+Contact Form Requirements
+The form must include:
+First Name
+Last Name
+Email
+Reason for Contact
+Comment
+Question
+Partnership
+Opportunity
+Other
+Message
+Submit button
+The form must:
+Validate required fields before submission.
+Send submitted data to the server.
+Automatically record the submission date and time.
+Set new messages to replied: false.
+Save the submission to data/contactReceived.json in Replit App Storage.
+Display a clear success message after a successful submission.
+Display a clear error message if the submission fails.
+Clear the form after a successful submission.
+Contact Form Persistence
+Use Replit App Storage so submissions persist across server restarts and deployments.
+Do not use browser localStorage, an in-memory array, or the local server filesystem as the primary data store.
+data/contactReceived.json must contain a valid JSON array.
+If data/contactReceived.json does not exist, the server must initialize it as an empty array:
+[]
+Contact Submission Format
+Each contact record must include:
+id: Unique string
+firstName: String
+lastName: String
+email: Valid email address
+reason: Comment, Question, Partnership, Opportunity, or Other
+message: Non-empty string
+submittedAt: ISO 8601 timestamp
+replied: Boolean, initially false
+repliedAt: ISO 8601 timestamp or null, initially null
+Example data structure:
+[
+  {
+    "id": "unique-id",
+    "firstName": "Jamie",
+    "lastName": "Smith",
+    "email": "jamie@example.com",
+    "reason": "Question",
+    "message": "I have a question about your project.",
+    "submittedAt": "2026-08-25T18:30:00",
+    "replied": false,
+    "repliedAt": null
+  }
+]
+Contact Form Acceptance Tests
+A valid form submission returns HTTP 201.
+The response contains the generated ID and submission timestamp.
+data/contactReceived.json exists in App Storage after the first submission.
+The file contains the submitted record as valid JSON.
+Multiple submissions are added to the JSON array without deleting previous submissions.
+Submissions remain available after restarting the server.
+Invalid submissions return HTTP 400 and do not modify the JSON file.
+A storage failure returns HTTP 500 and displays an error message in the user interface.
+Public contact submission does not require an Admin password, email provider, database, or other external service.
+Contact Form Implementation
+Use one Express endpoint:
+POST /api/contact
+The endpoint must:
+Receive the form data.
+Validate the request.
+Read data/contactReceived.json from App Storage.
+Initialize the file to [] if it does not exist.
+Generate a unique ID and submission timestamp.
+Append the new submission.
+Write the complete JSON array back to App Storage.
+Return the saved record with HTTP 201.
+Media Page
+Gallery displaying at least 9 media cards.
+Every media card must feature the student or something very closely related to them.
+Gallery includes at least:
+1 image
+1 video
+1 social media post or embed
+Every media card contains:
+Title
+Media
+Caption
+Hovering over any gallery card triggers an animation or visible style change.
+Clicking a gallery card opens a larger view of the media or takes the visitor to the original social media post.
+Future Page
+Organize information to tell the story of where you hope to be and what you hope to be doing over the next 5 years.
+Include at least one specific and realistically accomplishable long-term goal.
+Use a mix of media, text, headings, and other appropriate HTML elements to communicate your story.
+Your Choice Page #1
+Select a topic that helps visitors learn something meaningful about you, your interests, experiences, or goals.
+Rename choice1.html with a filename that clearly describes the topic.
+Tell a clear, organized, and visually appealing story about the selected topic.
+Use a mix of media, text, headings, and other appropriate HTML elements.
+Your Choice Page #2
+Select a different topic that helps visitors learn something meaningful about you, your interests, experiences, or goals.
+Rename choice2.html with a filename that clearly describes the topic.
+Tell a clear, organized, and visually appealing story about the selected topic.
+Use a mix of media, text, headings, and other appropriate HTML elements.
+Admin Page
+The Admin page provides a simple dashboard for managing and analyzing contact form submissions.
+Password Protection
+Access to contact message data and Admin operations requires a password.
+Store the Admin password using Replit Secrets.
+The Admin password must not be written directly into HTML, CSS, client-side JavaScript, or other publicly accessible files.
+Password verification must occur on the server.
+A visitor who has not successfully authenticated cannot retrieve contact message data or perform Admin operations.
+The Admin password must not be stored in browser localStorage.
+Message Management
+The Admin dashboard must:
+Read message data from data/contactReceived.json.
+Display all contact submissions.
+Show newest messages first.
+Display each message's:
+Name
+Email
+Reason
+Message
+Date received
+Reply status
+Clearly identify messages as New or Replied.
+Allow the Admin to filter messages by:
+All
+New
+Replied
+Mark as Replied
+Each new message must include a Mark as Replied operation.
+When selected:
+Find the message using its unique id.
+Change its replied value from false to true.
+Save the current date and time to repliedAt.
+Write the updated JSON array back to data/contactReceived.json.
+Update the Admin dashboard to show the new status.
+The operation must modify the stored JSON data. Changing only what appears on the screen does not meet the requirement.
+Dashboard Summary Values
+The Admin dashboard must automatically calculate and display:
+Total Messages
+New Messages
+Replied Messages
+Reply Rate
+Reply Rate is calculated as:
+Replied Messages ÷ Total Messages × 100
+These values must be calculated from the current JSON data and may not be hard-coded.
+Dashboard Chart
+Include at least one chart showing:
+Messages by Reason for Contact
+The chart must:
+Use the current contact submission data.
+Display the number of messages in each Reason for Contact category.
+Automatically update when the underlying data changes.
+Include a clear title and category labels.
+A JavaScript chart library such as Chart.js may be used.
+Admin Implementation
+The server must provide protected endpoints that allow the Admin dashboard to retrieve and update contact data.
+At minimum, the application must support:
+Admin password verification
+Retrieving contact messages
+Marking a message as replied
+Suggested endpoints:
+POST /api/admin/login
+GET /api/admin/messages
+PATCH /api/admin/messages/:id/replied
+The endpoints for retrieving and modifying contact data must require successful Admin authentication.
+Admin Acceptance Tests
+An incorrect Admin password does not provide access to contact message data.
+A correct Admin password provides access to the dashboard.
+Contact messages are loaded from data/contactReceived.json.
+Messages appear newest first.
+All, New, and Replied filters display the correct messages.
+Dashboard summary values match the stored JSON data.
+The chart accurately represents the Reason for Contact values in the stored data.
+Selecting Mark as Replied changes replied to true.
+Selecting Mark as Replied adds a valid timestamp to repliedAt.
+The updated reply status persists after refreshing the page or restarting the server.
+An unauthenticated visitor cannot retrieve messages or perform the Mark as Replied operation.
+Submission Requirements
+Submit the published Replit website URL.
+Before submitting, open the published website in a new browser tab and verify:
+All 6 pages load.
+Navigation works from every page.
+The active navigation state is correct on every page.
+Images, videos, and embedded media load.
+External links work.
+There are no broken links or 404 errors.
+Valid contact form submissions are successfully saved.
+Invalid contact form submissions are rejected.
+Contact submissions remain available after refreshing or restarting the application.
+The Admin dashboard requires successful password authentication.
+The Admin dashboard correctly displays stored messages.
+All, New, and Replied filters work correctly.
+Mark as Replied updates the stored message and reply timestamp.
+Dashboard summary values are calculated correctly.
+The chart accurately represents the stored contact data.
+The published version matches the completed project in Replit.
+
