@@ -19,7 +19,7 @@ function renderDashboard() {
   document.querySelectorAll("[data-reply-id]").forEach((button) => button.addEventListener("click", () => markReplied(button.dataset.replyId)));
 }
 function renderChart() {
-  const counts = Object.fromEntries(["Comment","Question","Partnership","Opportunity","Other"].map((reason) => [reason, 0]));
+  const counts = Object.fromEntries(["Comment","Question","Partnership","Opportunity","For Fun","Other"].map((reason) => [reason, 0]));
   messages.forEach((message) => { if (counts[message.reason] !== undefined) counts[message.reason]++; });
   const max = Math.max(1, ...Object.values(counts));
   return Object.entries(counts).map(([reason, count]) => `<div class="bar-row"><label>${reason}</label><div class="bar" style="width:${count / max * 100}%"></div><strong>${count}</strong></div>`).join("");
