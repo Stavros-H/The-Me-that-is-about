@@ -15,7 +15,7 @@ function renderShell() {
 }
 
 const mediaItems = [
-  ["Portrait placeholder", "IMAGE", "Replace with a photo that clearly shows me."],
+  ["Portrait", "IMAGE", "A personal photo from Stavros.", "assets/media-first-image.jpeg"],
   ["A day in progress", "VIDEO", "Replace with a personal video."],
   ["A social moment", "SOCIAL POST", "Replace with a social media embed or link."],
   ["Project detail", "IMAGE", "A closer look at something I made."],
@@ -28,7 +28,7 @@ const mediaItems = [
 function renderGallery() {
   const gallery = document.querySelector("#media-gallery");
   if (!gallery) return;
-  gallery.innerHTML = mediaItems.map(([title,type,caption], index) => `<article class="gallery-card" tabindex="0" data-placeholder-card><div class="media-placeholder">${type}<br><small>placeholder ${String(index + 1).padStart(2,"0")}</small></div><h3>${title}</h3><p>${caption}</p></article>`).join("");
+  gallery.innerHTML = mediaItems.map(([title,type,caption,src], index) => `<article class="gallery-card" tabindex="0" data-placeholder-card>${src ? `<img class="gallery-image" src="${src}" alt="${title}">` : `<div class="media-placeholder">${type}<br><small>placeholder ${String(index + 1).padStart(2,"0")}</small></div>`}<h3>${title}</h3><p>${caption}</p></article>`).join("");
   const modal = document.createElement("div");
   modal.className = "media-modal";
   modal.innerHTML = `<div class="media-modal-content" role="dialog" aria-modal="true" aria-label="Media preview"><button class="media-modal-close" aria-label="Close preview">×</button><div class="media-modal-art"></div><h2></h2><p></p></div>`;
@@ -38,8 +38,8 @@ function renderGallery() {
   modal.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
   gallery.querySelectorAll(".gallery-card").forEach((card, index) => {
     const openModal = () => {
-      const [title, type, caption] = mediaItems[index];
-      modal.querySelector(".media-modal-art").textContent = `${type} PLACEHOLDER`;
+      const [title, type, caption, src] = mediaItems[index];
+      modal.querySelector(".media-modal-art").innerHTML = src ? `<img class="modal-image" src="${src}" alt="${title}">` : `${type} PLACEHOLDER`;
       modal.querySelector("h2").textContent = title;
       modal.querySelector("p").textContent = caption;
       modal.classList.add("open");
