@@ -15,8 +15,8 @@ function renderShell() {
 }
 
 const mediaItems = [
-  ["Portrait", "IMAGE", "A personal photo from Stavros.", "assets/media-first-image.jpeg"],
-  ["A day in progress", "VIDEO", "Replace with a personal video."],
+  ["Pikmin", "IMAGE", "I went to Universal once, and they had Nintento World there. Mostly Mario there, but i found some Pikmin.", "assets/media-first-image.jpeg"],
+  ["A day in progress", "IMAGE", "Replace with a personal photo.", "assets/media-second-image.jpeg"],
   ["A social moment", "SOCIAL POST", "Replace with a social media embed or link."],
   ["Project detail", "IMAGE", "A closer look at something I made."],
   ["Behind the scenes", "VIDEO", "A placeholder for process footage."],
