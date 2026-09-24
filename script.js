@@ -21,9 +21,9 @@ const mediaItems = [
   ["Doom Scrolling", "IMAGE", "I do do stuff. But, i also doom scroll a lot. Not shorts content, but Youtube.", "assets/media-fourth-image.jpeg"],
   ["Hand of Mine", "VIDEO", "It's my hand. How inspired. How... unique.", "assets/media-fifth-video.mp4"],
   ["Games, but BOARD", "IMAGE", "I like games. I also like board games. And, i have a lot of board games.", "assets/media-sixth-image.jpeg"],
-  ["A work in progress", "IMAGE", "A current work in progress.", "assets/media-seventh-image.jpeg"],
-  ["A meaningful moment", "IMAGE", "A photo shared by Stavros.", "assets/media-eighth-image.png"],
-  ["Looking forward", "VIDEO", "A video about a future goal."]
+  ["Its Me Again", "IMAGE", "Hey. Hi. Hello.", "assets/media-seventh-image.jpeg"],
+  ["Social Media Post", "IMAGE", "You can tell this is a social media post by the fact that it has hashtags and picture and text.", "assets/media-eighth-image.png"],
+  ["Looking forward", "IMAGE", "A photo shared by Stavros.", "assets/media-ninth-image.jpeg"]
 ];
 function renderGallery() {
   const gallery = document.querySelector("#media-gallery");
