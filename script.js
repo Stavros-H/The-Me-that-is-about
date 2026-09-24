@@ -23,7 +23,7 @@ const mediaItems = [
   ["Games, but BOARD", "IMAGE", "I like games. I also like board games. And, i have a lot of board games.", "assets/media-sixth-image.jpeg"],
   ["Its Me Again", "IMAGE", "Hey. Hi. Hello.", "assets/media-seventh-image.jpeg"],
   ["Social Media Post", "IMAGE", "You can tell this is a social media post by the fact that it has hashtags and picture and text.", "assets/media-eighth-image.png"],
-  ["Looking forward", "IMAGE", "A photo shared by Stavros.", "assets/media-ninth-image.jpeg"]
+  ["Drawing", "IMAGE", "Did i mention that i draw sometimes. Well, i do. Cool. Wow.", "assets/media-ninth-image.jpeg"]
 ];
 function renderGallery() {
   const gallery = document.querySelector("#media-gallery");
