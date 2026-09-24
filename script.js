@@ -20,8 +20,8 @@ const mediaItems = [
   ["Game", "IMAGE", "This is Earthbound, a very old game. I like games, and old ones are no acception.", "assets/media-third-image.jpeg"],
   ["Doom Scrolling", "IMAGE", "I do do stuff. But, i also doom scroll a lot. Not shorts content, but Youtube.", "assets/media-fourth-image.jpeg"],
   ["Hand of Mine", "VIDEO", "It's my hand. How inspired. How... unique.", "assets/media-fifth-video.mp4"],
-  ["A favorite place", "IMAGE", "A photo shared by Stavros.", "assets/media-sixth-image.jpeg"],
-  ["A work in progress", "IMAGE", "Share something I am building."],
+  ["Games, but BOARD", "IMAGE", "I like games. I also like board games. And, i have a lot of board games.", "assets/media-sixth-image.jpeg"],
+  ["A work in progress", "IMAGE", "A current work in progress.", "assets/media-seventh-image.jpeg"],
   ["A meaningful moment", "SOCIAL POST", "Add an original social post here."],
   ["Looking forward", "VIDEO", "A video about a future goal."]
 ];
