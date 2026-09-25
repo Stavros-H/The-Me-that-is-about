@@ -1,6 +1,6 @@
 const navItems = [
   ["index.html", "Home"], ["media.html", "Media"], ["future.html", "Future"],
-  ["choice1-learning.html", "Learning"], ["choice2-the-pit.html", "The Pit"], ["admin.html", "Admin"]
+  ["choice1-random-thoughts.html", "Random Thoughts"], ["choice2-the-pit.html", "The Pit"], ["admin.html", "Admin"]
 ];
 
 function renderShell() {
@@ -66,8 +66,37 @@ async function submitContact(event) {
   finally { button.disabled = false; }
 }
 
+function setupExplodeButton() {
+  const explodeBtn = document.getElementById("explode-btn");
+  if (!explodeBtn) return;
+  const thoughtBoxes = document.querySelectorAll(".thought-box");
+  let exploded = false;
+  explodeBtn.addEventListener("click", () => {
+    if (exploded) {
+      thoughtBoxes.forEach(box => {
+        box.style.transform = "translate(0, 0)";
+        box.style.transition = "transform 0.5s ease-out";
+      });
+      explodeBtn.textContent = "Click to Explode";
+      exploded = false;
+    } else {
+      thoughtBoxes.forEach(box => {
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 300 + Math.random() * 200;
+        const x = Math.cos(angle) * distance;
+        const y = Math.sin(angle) * distance;
+        box.style.transform = `translate(${x}px, ${y}px)`;
+        box.style.transition = "transform 0.8s ease-out";
+      });
+      explodeBtn.textContent = "Click to Reset";
+      exploded = true;
+    }
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   renderShell(); renderGallery();
   document.querySelector("#contact-form")?.addEventListener("submit", submitContact);
   document.querySelectorAll("[data-placeholder-link], [data-placeholder-card]").forEach((element) => element.addEventListener("click", (event) => { if (element.matches("a")) event.preventDefault(); }));
+  setupExplodeButton();
 });
