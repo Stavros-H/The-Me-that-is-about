@@ -66,31 +66,71 @@ async function submitContact(event) {
   finally { button.disabled = false; }
 }
 
+function createExplosionGraphic(container) {
+  const graphic = document.createElement("div");
+  graphic.className = "explosion-graphic";
+  graphic.style.left = "50%";
+  graphic.style.top = "50%";
+  graphic.style.transform = "translate(-50%, -50%)";
+  container.appendChild(graphic);
+  
+  for (let i = 0; i < 20; i++) {
+    const particle = document.createElement("div");
+    particle.className = "explosion-particle";
+    const angle = Math.random() * Math.PI * 2;
+    const distance = 100 + Math.random() * 150;
+    const size = 8 + Math.random() * 12;
+    const duration = 0.6 + Math.random() * 0.4;
+    const delay = Math.random() * 0.2;
+    
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+    particle.style.left = "50%";
+    particle.style.top = "50%";
+    particle.style.transform = "translate(-50%, -50%)";
+    particle.style.opacity = "0";
+    
+    graphic.appendChild(particle);
+    
+    setTimeout(() => {
+      particle.style.transform = `translate(${Math.cos(angle) * distance}px, ${Math.sin(angle) * distance}px)`;
+      particle.style.opacity = "0";
+      particle.style.transition = `transform ${duration}s ease-out, opacity ${duration}s ease-out`;
+    }, delay * 1000);
+  }
+  
+  setTimeout(() => {
+    graphic.remove();
+  }, 1000);
+}
+
 function setupExplodeButton() {
   const explodeBtn = document.getElementById("explode-btn");
   if (!explodeBtn) return;
   const thoughtBoxes = document.querySelectorAll(".thought-box");
-  let exploded = false;
+  const explosionContainer = document.getElementById("explosion-graphic");
+  
   explodeBtn.addEventListener("click", () => {
-    if (exploded) {
+    createExplosionGraphic(explodeBtn.parentElement);
+    
+    thoughtBoxes.forEach(box => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 300 + Math.random() * 200;
+      const x = Math.cos(angle) * distance;
+      const y = Math.sin(angle) * distance;
+      
+      box.style.transform = `translate(${x}px, ${y}px)`;
+      box.style.transition = "transform 0.8s ease-out";
+      box.classList.add("exploded");
+    });
+    
+    explodeBtn.classList.add("hidden");
+    
+    setTimeout(() => {
       thoughtBoxes.forEach(box => {
-        box.style.transform = "translate(0, 0)";
-        box.style.transition = "transform 0.5s ease-out";
+        box.style.display = "none";
       });
-      explodeBtn.textContent = "Click to Explode";
-      exploded = false;
-    } else {
-      thoughtBoxes.forEach(box => {
-        const angle = Math.random() * Math.PI * 2;
-        const distance = 300 + Math.random() * 200;
-        const x = Math.cos(angle) * distance;
-        const y = Math.sin(angle) * distance;
-        box.style.transform = `translate(${x}px, ${y}px)`;
-        box.style.transition = "transform 0.8s ease-out";
-      });
-      explodeBtn.textContent = "Click to Reset";
-      exploded = true;
-    }
+    }, 800);
   });
 }
 
